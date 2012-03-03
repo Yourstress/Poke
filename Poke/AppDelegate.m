@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
+#import "SceneBank.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -26,15 +26,15 @@
 	//
 #if GAME_AUTOROTATION == kGameAutorotationUIViewController
 
-//	CC_ENABLE_DEFAULT_GL_STATES();
-//	CCDirector *director = [CCDirector sharedDirector];
-//	CGSize size = [director winSize];
-//	CCSprite *sprite = [CCSprite spriteWithFile:@"Default.png"];
-//	sprite.position = ccp(size.width/2, size.height/2);
-//	sprite.rotation = -90;
-//	[sprite visit];
-//	[[director openGLView] swapBuffers];
-//	CC_ENABLE_DEFAULT_GL_STATES();
+	CC_ENABLE_DEFAULT_GL_STATES();
+	CCDirector *director = [CCDirector sharedDirector];
+	CGSize size = [director winSize];
+	CCSprite *sprite = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
+	sprite.position = ccp(size.width/2, size.height/2);
+	sprite.rotation = 0;
+	[sprite visit];
+	[[director openGLView] swapBuffers];
+	CC_ENABLE_DEFAULT_GL_STATES();
 	
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController	
 }
@@ -62,7 +62,7 @@
 	//
 	//
 	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
+								   pixelFormat:kEAGLColorFormatRGBA8	// kEAGLColorFormatRGBA8
 								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
 						];
 	
@@ -89,8 +89,12 @@
 #endif
 	
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];
 	
+	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+	{
+//		[director enableRetinaDisplay:YES];
+		[director setContentScaleFactor:3];
+	}
 	
 	// make the OpenGLView a child of the view controller
 	[viewController setView:glView];
@@ -109,32 +113,53 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
+	st = [[Standard alloc] init];
+	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [SceneBank node]];
 }
 
 
-- (void)applicationWillResignActive:(UIApplication *)application {
+- (void)applicationWillResignActive:(UIApplication *)application
+{
 	[[CCDirector sharedDirector] pause];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
 	[[CCDirector sharedDirector] resume];
 }
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
 	[[CCDirector sharedDirector] purgeCachedData];
 }
 
--(void) applicationDidEnterBackground:(UIApplication*)application {
+-(void) applicationDidEnterBackground:(UIApplication*)application
+{
+	// save data
+	[st saveBank];
+	
+	// save user defaults
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
 	[[CCDirector sharedDirector] stopAnimation];
 }
 
--(void) applicationWillEnterForeground:(UIApplication*)application {
+-(void) applicationWillEnterForeground:(UIApplication*)application
+{
 	[[CCDirector sharedDirector] startAnimation];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+	// save data
+	[st saveBank];
+	
+	// save user defaults
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	
 	CCDirector *director = [CCDirector sharedDirector];
 	
 	[[director openGLView] removeFromSuperview];
@@ -152,6 +177,7 @@
 
 - (void)dealloc {
 	[[CCDirector sharedDirector] end];
+	[st release];
 	[window release];
 	[super dealloc];
 }
