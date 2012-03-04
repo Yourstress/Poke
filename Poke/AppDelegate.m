@@ -90,11 +90,6 @@
 	
 	[director setAnimationInterval:1.0/60];
 	
-	/*if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-	{
-		[glView setMultipleTouchEnabled:YES];
-	}*/
-	
 	// make the OpenGLView a child of the view controller
 	[viewController setView:glView];
 	

@@ -15,6 +15,7 @@
 @implementation SceneBank
 
 #pragma mark -
+#pragma mark Initialization
 
 -(id)init
 {
