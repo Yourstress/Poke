@@ -34,6 +34,7 @@
 		0BF5A12E14B3AA1A00493481 /* IconTimeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A12C14B3AA1A00493481 /* IconTimeline.png */; };
 		0BF5A12F14B3AA1A00493481 /* IconTimelineDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A12D14B3AA1A00493481 /* IconTimelineDown.png */; };
 		0BF5A13114B3DDAB00493481 /* BackgroundTimeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A13014B3DDAB00493481 /* BackgroundTimeline.png */; };
+		32B0D0F31502EFDC0049BA33 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B0D0F21502EC010049BA33 /* CCLayerPanZoom.m */; };
 		520088C314885A2100C4467B /* LayerPopoverTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 520088C214885A2100C4467B /* LayerPopoverTable.m */; };
 		521451101491BD330039C4C1 /* NumberC.png in Resources */ = {isa = PBXBuildFile; fileRef = 5214510C1491BD330039C4C1 /* NumberC.png */; };
 		521451111491BD330039C4C1 /* NumberCDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 5214510D1491BD330039C4C1 /* NumberCDown.png */; };
@@ -192,7 +193,6 @@
 		52691B181492B69D00332E89 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 52691B171492B69D00332E89 /* Default-Landscape~ipad.png */; };
 		5272D76B14884DA400BEF87F /* LayerPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 5272D76A14884DA400BEF87F /* LayerPopover.m */; };
 		52A7522E148DBD46005317D2 /* LayerPopoverTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A7522D148DBD46005317D2 /* LayerPopoverTransaction.m */; };
-		52AAEB3F14887558008B00D9 /* CCScrollingMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AAEB3E14887558008B00D9 /* CCScrollingMenu.m */; };
 		52AAEB4C14887F2E008B00D9 /* CCTargetedTouchMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AAEB4B14887F2E008B00D9 /* CCTargetedTouchMenu.m */; };
 /* End PBXBuildFile section */
 
@@ -229,6 +229,8 @@
 		0BF5A12C14B3AA1A00493481 /* IconTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimeline.png; sourceTree = "<group>"; };
 		0BF5A12D14B3AA1A00493481 /* IconTimelineDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimelineDown.png; sourceTree = "<group>"; };
 		0BF5A13014B3DDAB00493481 /* BackgroundTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundTimeline.png; sourceTree = "<group>"; };
+		32B0D0F11502EC010049BA33 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
+		32B0D0F21502EC010049BA33 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
 		520088C114885A2100C4467B /* LayerPopoverTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPopoverTable.h; sourceTree = "<group>"; };
 		520088C214885A2100C4467B /* LayerPopoverTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPopoverTable.m; sourceTree = "<group>"; };
 		5214510C1491BD330039C4C1 /* NumberC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumberC.png; sourceTree = "<group>"; };
@@ -509,8 +511,6 @@
 		5272D76A14884DA400BEF87F /* LayerPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPopover.m; sourceTree = "<group>"; };
 		52A7522C148DBD46005317D2 /* LayerPopoverTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPopoverTransaction.h; sourceTree = "<group>"; };
 		52A7522D148DBD46005317D2 /* LayerPopoverTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPopoverTransaction.m; sourceTree = "<group>"; };
-		52AAEB3D14887558008B00D9 /* CCScrollingMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollingMenu.h; sourceTree = "<group>"; };
-		52AAEB3E14887558008B00D9 /* CCScrollingMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollingMenu.m; sourceTree = "<group>"; };
 		52AAEB4A14887F2E008B00D9 /* CCTargetedTouchMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTargetedTouchMenu.h; sourceTree = "<group>"; };
 		52AAEB4B14887F2E008B00D9 /* CCTargetedTouchMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTargetedTouchMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1017,10 +1017,10 @@
 		525945891487152900C0E9E8 /* cocos2d mod */ = {
 			isa = PBXGroup;
 			children = (
+				32B0D0F11502EC010049BA33 /* CCLayerPanZoom.h */,
+				32B0D0F21502EC010049BA33 /* CCLayerPanZoom.m */,
 				52AAEB4A14887F2E008B00D9 /* CCTargetedTouchMenu.h */,
 				52AAEB4B14887F2E008B00D9 /* CCTargetedTouchMenu.m */,
-				52AAEB3D14887558008B00D9 /* CCScrollingMenu.h */,
-				52AAEB3E14887558008B00D9 /* CCScrollingMenu.m */,
 				5259458A1487154500C0E9E8 /* CCLabelStroked.h */,
 				5259458B1487154500C0E9E8 /* CCLabelStroked.m */,
 				524D9B08148AB29400B8D0B9 /* CCNodeEx.h */,
@@ -1092,7 +1092,7 @@
 		525943EB14831C1600C0E9E8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 525943EE14831C1600C0E9E8 /* Build configuration list for PBXProject "Poke" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1295,7 +1295,6 @@
 				525945901487336D00C0E9E8 /* LayerPlayers.m in Sources */,
 				5272D76B14884DA400BEF87F /* LayerPopover.m in Sources */,
 				520088C314885A2100C4467B /* LayerPopoverTable.m in Sources */,
-				52AAEB3F14887558008B00D9 /* CCScrollingMenu.m in Sources */,
 				52AAEB4C14887F2E008B00D9 /* CCTargetedTouchMenu.m in Sources */,
 				524D9B0A148AB29400B8D0B9 /* CCNodeEx.m in Sources */,
 				52A7522E148DBD46005317D2 /* LayerPopoverTransaction.m in Sources */,
@@ -1305,6 +1304,7 @@
 				0BF5A11D14AE1D0500493481 /* LayerPopoverTableTransactions.m in Sources */,
 				0B09BB8A14B90B7E0065BF69 /* LayerTimeline.m in Sources */,
 				0B30749314C26ABD006B3100 /* NodePlayer.m in Sources */,
+				32B0D0F31502EFDC0049BA33 /* CCLayerPanZoom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1323,7 +1323,7 @@
 					"COCOS2D_DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -1338,7 +1338,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -1356,6 +1356,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Poke/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Poke/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
@@ -1373,6 +1374,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Poke/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Poke/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";

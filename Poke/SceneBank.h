@@ -48,6 +48,7 @@ typedef enum
 	BOOL isTimelineOn;
 }
 
+#pragma mark -
 #pragma mark Initialization
 
 -(void)initBackground;
