@@ -34,6 +34,11 @@
 		0BF5A12E14B3AA1A00493481 /* IconTimeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A12C14B3AA1A00493481 /* IconTimeline.png */; };
 		0BF5A12F14B3AA1A00493481 /* IconTimelineDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A12D14B3AA1A00493481 /* IconTimelineDown.png */; };
 		0BF5A13114B3DDAB00493481 /* BackgroundTimeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BF5A13014B3DDAB00493481 /* BackgroundTimeline.png */; };
+		32463FC71508767C00BB52B7 /* Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32463FC61508767C00BB52B7 /* Standard.m */; };
+		32463FD11508769B00BB52B7 /* Bank.m in Sources */ = {isa = PBXBuildFile; fileRef = 32463FCA1508769B00BB52B7 /* Bank.m */; };
+		32463FD21508769B00BB52B7 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 32463FCC1508769B00BB52B7 /* Player.m */; };
+		32463FD31508769B00BB52B7 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 32463FCE1508769B00BB52B7 /* Session.m */; };
+		32463FD41508769B00BB52B7 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 32463FD01508769B00BB52B7 /* Transaction.m */; };
 		520088C314885A2100C4467B /* LayerPopoverTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 520088C214885A2100C4467B /* LayerPopoverTable.m */; };
 		521451101491BD330039C4C1 /* NumberC.png in Resources */ = {isa = PBXBuildFile; fileRef = 5214510C1491BD330039C4C1 /* NumberC.png */; };
 		521451111491BD330039C4C1 /* NumberCDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 5214510D1491BD330039C4C1 /* NumberCDown.png */; };
@@ -182,11 +187,6 @@
 		525945731487037E00C0E9E8 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5259456E1487037E00C0E9E8 /* Background.png */; };
 		525945761487037E00C0E9E8 /* PopoverArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 525945711487037E00C0E9E8 /* PopoverArrow.png */; };
 		525945771487037E00C0E9E8 /* PopoverBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 525945721487037E00C0E9E8 /* PopoverBackground.png */; };
-		52594584148714CA00C0E9E8 /* Bank.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259457B148714CA00C0E9E8 /* Bank.m */; };
-		52594585148714CA00C0E9E8 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259457D148714CA00C0E9E8 /* Player.m */; };
-		52594586148714CA00C0E9E8 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259457F148714CA00C0E9E8 /* Session.m */; };
-		52594587148714CA00C0E9E8 /* Standard.m in Sources */ = {isa = PBXBuildFile; fileRef = 52594581148714CA00C0E9E8 /* Standard.m */; };
-		52594588148714CA00C0E9E8 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 52594583148714CA00C0E9E8 /* Transaction.m */; };
 		5259458C1487154500C0E9E8 /* CCLabelStroked.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259458B1487154500C0E9E8 /* CCLabelStroked.m */; };
 		525945901487336D00C0E9E8 /* LayerPlayers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259458F1487336D00C0E9E8 /* LayerPlayers.m */; };
 		52691B181492B69D00332E89 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 52691B171492B69D00332E89 /* Default-Landscape~ipad.png */; };
@@ -228,6 +228,16 @@
 		0BF5A12C14B3AA1A00493481 /* IconTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimeline.png; sourceTree = "<group>"; };
 		0BF5A12D14B3AA1A00493481 /* IconTimelineDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimelineDown.png; sourceTree = "<group>"; };
 		0BF5A13014B3DDAB00493481 /* BackgroundTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundTimeline.png; sourceTree = "<group>"; };
+		32463FC51508767C00BB52B7 /* Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Standard.h; sourceTree = "<group>"; };
+		32463FC61508767C00BB52B7 /* Standard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Standard.m; sourceTree = "<group>"; };
+		32463FC91508769B00BB52B7 /* Bank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bank.h; sourceTree = "<group>"; };
+		32463FCA1508769B00BB52B7 /* Bank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bank.m; sourceTree = "<group>"; };
+		32463FCB1508769B00BB52B7 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		32463FCC1508769B00BB52B7 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		32463FCD1508769B00BB52B7 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		32463FCE1508769B00BB52B7 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		32463FCF1508769B00BB52B7 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
+		32463FD01508769B00BB52B7 /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
 		520088C114885A2100C4467B /* LayerPopoverTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPopoverTable.h; sourceTree = "<group>"; };
 		520088C214885A2100C4467B /* LayerPopoverTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPopoverTable.m; sourceTree = "<group>"; };
 		5214510C1491BD330039C4C1 /* NumberC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumberC.png; sourceTree = "<group>"; };
@@ -489,16 +499,6 @@
 		5259456E1487037E00C0E9E8 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		525945711487037E00C0E9E8 /* PopoverArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopoverArrow.png; sourceTree = "<group>"; };
 		525945721487037E00C0E9E8 /* PopoverBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopoverBackground.png; sourceTree = "<group>"; };
-		5259457A148714CA00C0E9E8 /* Bank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bank.h; path = "Bank Logic/Bank.h"; sourceTree = "<group>"; };
-		5259457B148714CA00C0E9E8 /* Bank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bank.m; path = "Bank Logic/Bank.m"; sourceTree = "<group>"; };
-		5259457C148714CA00C0E9E8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = "Bank Logic/Player.h"; sourceTree = "<group>"; };
-		5259457D148714CA00C0E9E8 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = "Bank Logic/Player.m"; sourceTree = "<group>"; };
-		5259457E148714CA00C0E9E8 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = "Bank Logic/Session.h"; sourceTree = "<group>"; };
-		5259457F148714CA00C0E9E8 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = "Bank Logic/Session.m"; sourceTree = "<group>"; };
-		52594580148714CA00C0E9E8 /* Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Standard.h; path = "Bank Logic/Standard.h"; sourceTree = "<group>"; };
-		52594581148714CA00C0E9E8 /* Standard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Standard.m; path = "Bank Logic/Standard.m"; sourceTree = "<group>"; };
-		52594582148714CA00C0E9E8 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transaction.h; path = "Bank Logic/Transaction.h"; sourceTree = "<group>"; };
-		52594583148714CA00C0E9E8 /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Transaction.m; path = "Bank Logic/Transaction.m"; sourceTree = "<group>"; };
 		5259458A1487154500C0E9E8 /* CCLabelStroked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLabelStroked.h; sourceTree = "<group>"; };
 		5259458B1487154500C0E9E8 /* CCLabelStroked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLabelStroked.m; sourceTree = "<group>"; };
 		5259458E1487336D00C0E9E8 /* LayerPlayers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPlayers.h; sourceTree = "<group>"; };
@@ -677,8 +677,8 @@
 				5259455B14831C2200C0E9E8 /* AppDelegate.m */,
 				5259455D14831C2200C0E9E8 /* RootViewController.h */,
 				5259455E14831C2200C0E9E8 /* RootViewController.m */,
-				52594580148714CA00C0E9E8 /* Standard.h */,
-				52594581148714CA00C0E9E8 /* Standard.m */,
+				32463FC51508767C00BB52B7 /* Standard.h */,
+				32463FC61508767C00BB52B7 /* Standard.m */,
 				5259456314831C2300C0E9E8 /* GameConfig.h */,
 				5259456C14831CFE00C0E9E8 /* Scenes & Layers */,
 				525945791487147900C0E9E8 /* Bank Logic */,
@@ -999,14 +999,14 @@
 		525945791487147900C0E9E8 /* Bank Logic */ = {
 			isa = PBXGroup;
 			children = (
-				5259457A148714CA00C0E9E8 /* Bank.h */,
-				5259457B148714CA00C0E9E8 /* Bank.m */,
-				5259457C148714CA00C0E9E8 /* Player.h */,
-				5259457D148714CA00C0E9E8 /* Player.m */,
-				5259457E148714CA00C0E9E8 /* Session.h */,
-				5259457F148714CA00C0E9E8 /* Session.m */,
-				52594582148714CA00C0E9E8 /* Transaction.h */,
-				52594583148714CA00C0E9E8 /* Transaction.m */,
+				32463FC91508769B00BB52B7 /* Bank.h */,
+				32463FCA1508769B00BB52B7 /* Bank.m */,
+				32463FCB1508769B00BB52B7 /* Player.h */,
+				32463FCC1508769B00BB52B7 /* Player.m */,
+				32463FCD1508769B00BB52B7 /* Session.h */,
+				32463FCE1508769B00BB52B7 /* Session.m */,
+				32463FCF1508769B00BB52B7 /* Transaction.h */,
+				32463FD01508769B00BB52B7 /* Transaction.m */,
 			);
 			name = "Bank Logic";
 			sourceTree = "<group>";
@@ -1281,11 +1281,6 @@
 				5259455C14831C2200C0E9E8 /* AppDelegate.m in Sources */,
 				5259455F14831C2200C0E9E8 /* RootViewController.m in Sources */,
 				5259456B14831CF400C0E9E8 /* SceneBank.m in Sources */,
-				52594584148714CA00C0E9E8 /* Bank.m in Sources */,
-				52594585148714CA00C0E9E8 /* Player.m in Sources */,
-				52594586148714CA00C0E9E8 /* Session.m in Sources */,
-				52594587148714CA00C0E9E8 /* Standard.m in Sources */,
-				52594588148714CA00C0E9E8 /* Transaction.m in Sources */,
 				5259458C1487154500C0E9E8 /* CCLabelStroked.m in Sources */,
 				525945901487336D00C0E9E8 /* LayerPlayers.m in Sources */,
 				5272D76B14884DA400BEF87F /* LayerPopover.m in Sources */,
@@ -1299,6 +1294,11 @@
 				0BF5A11D14AE1D0500493481 /* LayerPopoverTableTransactions.m in Sources */,
 				0B09BB8A14B90B7E0065BF69 /* LayerTimeline.m in Sources */,
 				0B30749314C26ABD006B3100 /* NodePlayer.m in Sources */,
+				32463FC71508767C00BB52B7 /* Standard.m in Sources */,
+				32463FD11508769B00BB52B7 /* Bank.m in Sources */,
+				32463FD21508769B00BB52B7 /* Player.m in Sources */,
+				32463FD31508769B00BB52B7 /* Session.m in Sources */,
+				32463FD41508769B00BB52B7 /* Transaction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
