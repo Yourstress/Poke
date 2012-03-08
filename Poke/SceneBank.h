@@ -36,6 +36,7 @@ typedef enum
 	CCMenuItemSprite *buttonAddPlayer;
 	CCMenuItemSprite *buttonTransactions;
 	CCMenuItemSprite *buttonTimeline;
+	CCMenuItemLabel *buttonBankName;		// for renaming bank
 	
 	// timeline
 	LayerTimeline *layerTimeline;

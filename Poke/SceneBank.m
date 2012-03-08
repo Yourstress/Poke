@@ -88,12 +88,32 @@
 	buttonTimeline.position = ccp(st.size.width-311, 666);
 	[menuButtons addChild:buttonTimeline];
 	
-	// bank name label
+	// bank name BUTTON
 	labelBankName = [CCLabelStroked labelWithString:@"[No bank selected]" fontName:FontFamilyRegular fontSize:36];
-	labelBankName.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, 14));
-	labelBankName.anchorPoint = ccp(0,0.5);
 	labelBankName.strokeSize = 3;
-	[self addChild:labelBankName];
+//	[self addChild:labelBankName];
+	buttonBankName = [CCMenuItemLabel itemWithLabel:labelBankName block:^(id sender)
+					  {
+						  if (!st.currentBank)
+							  return;
+						  
+						  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Player" message:@"Please enter a new name for this bank." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel", nil];
+						  alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+						  alert.tag = 'R';
+
+						  UITextField *textField = [alert textFieldAtIndex:0];
+						  textField.text = st.currentBank.name;
+						  
+						  [alert show];
+						  [alert release];
+						  
+						  // play alert sound
+						  [[SimpleAudioEngine sharedEngine] playEffect:@"SoundAlert.mp3"];
+					  }];
+	buttonBankName.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, 14));
+	buttonBankName.anchorPoint = ccp(0,0.5);
+	[menuButtons addChild:buttonBankName];
+	
 	
 	// bank balance label
 	labelBankBalance = [CCLabelStroked labelWithString:@"0.000 KD" fontName:FontFamilyRegular fontSize:32];
@@ -337,6 +357,22 @@
 			if (layerTimeline.isShown)	[self refreshTimeline];
 		}
 	}
+	else if (alertView.tag == 'R')	// RENAME BANK
+	{
+		if (buttonIndex == 0)		// OK
+		{
+			// validate new name
+			if (![Bank validateString:[alertView textFieldAtIndex:0].text withOptions:ValidationTypeBankName])
+				return;
+			
+			// rename it
+			if (![st renameCurrentBankTo:[alertView textFieldAtIndex:0].text])
+				NSLog(@"Unable to rename bank.");
+			
+			// refresh bank
+			[self refreshBank];
+		}
+	}
 }
 
 -(void)onBank:(id)sender
@@ -388,6 +424,15 @@
 
 -(void)onTransactions:(id)sender
 {
+	// if there's no bank selected
+	if (!st.currentBank)
+	{
+		// show an alert
+		[Standard alertViewWithTitle:@"No bank selected." message:@"You must first select a bank to view its transactions." cancalButtonTitle:@"OK"];
+		
+		return;
+	}
+	
 	// show all transactions
 	LayerPopoverTableTransactions *popover = [LayerPopoverTableTransactions popoverWithPosition:buttonTransactions.position title:@"All Transactions" items:st.currentBank.transactions block:^(id data)
 											  {
@@ -423,6 +468,15 @@
 
 -(void)onTimeline:(id)sender
 {
+	// if there's no bank selected
+	if (!st.currentBank)
+	{
+		// show an alert
+		[Standard alertViewWithTitle:@"No bank selected." message:@"You must first select a bank before using the timeline." cancalButtonTitle:@"OK"];
+		
+		return;
+	}
+	
 	// play sound
 	[[SimpleAudioEngine sharedEngine] playEffect:@"SoundTimeline.mp3"];
 	
@@ -488,9 +542,9 @@
 }
 
 -(void)onAddPlayer:(id)sender
-{	
+{
 	// if there's no bank selected
-	if ([st currentBank] == nil)
+	if (!st.currentBank)
 	{
 		// show an alert
 		[Standard alertViewWithTitle:@"No bank selected." message:@"You must first select a bank before adding players." cancalButtonTitle:@"OK"];
@@ -647,7 +701,7 @@
 			else if (itemDragged.tag == ItemTypePlayer)
 			{
 				NSString *message = [NSString stringWithFormat:@"Are you sure you want to delete the player [%@]?", [st.currentBank name]];
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Bank" message:message delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Player" message:message delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 				alert.tag = 'p';
 				[alert show];
 				[alert release];

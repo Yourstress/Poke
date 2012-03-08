@@ -17,6 +17,9 @@
 		// create confirm button
 		CCMenuItemImage *buttonConfirm = [CCMenuItemImage itemFromNormalImage:@"PopoverButton.png" selectedImage:@"PopoverButtonDown.png" block:^(id sender)
 										  {
+											  // disable this
+											  [sender setIsEnabled:NO];
+											  
 											  // process transaction
 											  [self processTransaction];
 											  
@@ -75,6 +78,11 @@
 	[layer addChild:transactionNodeFrom];
 	
 	[self setFromPlayerCurrentBalance:st.currentBank.balance];
+	
+	// add minus badge
+	CCSprite *badgeMinus	= [CCSprite spriteWithFile:@"BadgeMinus.png"];
+	badgeMinus.position = ccp(transactionNodeFrom.contentSize.width*0.9, transactionNodeFrom.contentSize.height*0.9);
+	[transactionNodeFrom addChild:badgeMinus];
 }
 
 -(void)setTransferFromPlayer:(NSString *)player
@@ -94,6 +102,11 @@
 	[transactionNodeFrom addChild:labelName];
 	
 	[self setFromPlayerCurrentBalance:[st.currentBank playerFromName:player].balance];
+	
+	// add minus badge
+	CCSprite *badgeMinus	= [CCSprite spriteWithFile:@"BadgeMinus.png"];
+	badgeMinus.position = ccp(transactionNodeFrom.contentSize.width*0.9, transactionNodeFrom.contentSize.height*0.9);
+	[transactionNodeFrom addChild:badgeMinus];
 }
 
 -(void)setTransferToBank
@@ -107,6 +120,11 @@
 	[layer addChild:transactionNodeTo];
 	
 	[self setToPlayerCurrentBalance:st.currentBank.balance];
+	
+	// add plus badge
+	CCSprite *badgePlus		= [CCSprite spriteWithFile:@"BadgePlus.png"];
+	badgePlus.position = ccp(transactionNodeTo.contentSize.width*0.9, transactionNodeTo.contentSize.height*0.9);
+	[transactionNodeTo addChild:badgePlus];
 }
 
 -(void)setTransferToPlayer:(NSString *)player
@@ -126,6 +144,11 @@
 	[transactionNodeTo addChild:labelName];
 	
 	[self setToPlayerCurrentBalance:[st.currentBank playerFromName:player].balance];
+	
+	// add plus badge
+	CCSprite *badgePlus		= [CCSprite spriteWithFile:@"BadgePlus.png"];
+	badgePlus.position = ccp(transactionNodeTo.contentSize.width*0.9, transactionNodeTo.contentSize.height*0.9);
+	[transactionNodeTo addChild:badgePlus];
 }
 
 -(void)setTransactionAmount:(float)amount

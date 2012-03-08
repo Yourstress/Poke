@@ -195,7 +195,7 @@
 	if ( (self = [super initWithDuration:d]) )
 	{
 		rate = 1.0f;
-		other = [action retain];
+		other = (CCActionInterval *)[action retain];
 	}
 	
 	return self;
@@ -253,7 +253,7 @@
 	if ( (self = [super initWithDuration:d]) )
 	{
 		rate = 1.0f;
-		other = [action retain];
+		other = (CCActionInterval *)[action retain];
 	}
 	
 	return self;
@@ -303,7 +303,7 @@
 	if ( (self = [super initWithDuration:d]) )
 	{
 		rate = 1.0f;
-		other = [action retain];
+		other = (CCActionInterval *)[action retain];
 	}
 	
 	return self;
