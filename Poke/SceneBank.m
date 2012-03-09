@@ -33,7 +33,7 @@
 		id action = [CCSequence actions:
 					 [CCDelayTime actionWithDuration:2.5],
 					 [CCFadeOut actionWithDuration:0.7],
-					 [CCCallBlock actionWithBlock:^(void) { [spSplash removeFromParentAndCleanup:YES]; }],
+					 [CCCallFuncND actionWithTarget:spSplash selector:@selector(removeFromParentAndCleanup:) data:(void *)YES],
 					 nil];
 
 		[spSplash runAction:action];
@@ -44,9 +44,6 @@
 		
 		// interface
 		[self initInterface];
-		
-		// TEMP: show the timeline
-//		[self onTimeline:buttonTimeline];
 	}
 	
 	return self;
@@ -636,8 +633,7 @@
 		// animate scaling
 		id action = [CCSequence actions:
 		[CCEaseExponentialOut actionWithAction:[CCScaleTo actionWithDuration:0.15 scale:1.8]],
-		[CCEaseExponentialOut actionWithAction:[CCScaleTo actionWithDuration:0.35 scale:1.15]],
-		[CCRotateBy actionWithDuration:0.25 angle:-3.5], nil];
+		[CCEaseExponentialOut actionWithAction:[CCScaleTo actionWithDuration:0.35 scale:1.15]], nil];
 		[itemDragged runAction:action];
 		
 		// add it

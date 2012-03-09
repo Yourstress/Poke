@@ -99,6 +99,10 @@
 	// set text color and alignment
 	cell.textLabel.textColor = [UIColor whiteColor];
 	cell.textLabel.textAlignment = UITextAlignmentCenter;
+
+	// set shadow
+	[cell.textLabel setShadowOffset:CGSizeMake(0, 2)];
+	[cell.textLabel setShadowColor:[UIColor blackColor]];
 		
 	// set transparent background
 	cell.backgroundView = nil;

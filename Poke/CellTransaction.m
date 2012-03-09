@@ -28,19 +28,34 @@
 	switch (detailView)
 	{
 		case DetailViewTimeDescription:
+		{
 			detail.text = [self timeDescription:t.timeStamp];
+			detail.textColor = [UIColor whiteColor];
 			break;
+		}
 		case DetailViewTimeDifference:
+		{
 			detail.text = [self timeDifference:t.timeStamp];
+			detail.textColor = [UIColor whiteColor];
 			break;
+		}
 		case DetailViewRecipiant:
+		{
+			BOOL bIsTransfer = t.playerOther != nil;
 			if (fullDetail)
 				detail.text = [t stringFromTransactionParties];
 			else
-				detail.text = [NSString stringWithFormat:@"[%@]", (t.playerOther != nil) ? t.playerOther.name : @"Bank"];
+				detail.text = [NSString stringWithFormat:@"[%@]", bIsTransfer ? t.playerOther.name : @"Bank"];
+			detail.textColor = !bIsTransfer ? [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1] : [UIColor whiteColor];
 			break;
+		}
 		case DetailViewNotes:
-			detail.text = t.note;
+		{
+			BOOL bEmptyNote = (t.note == nil || t.note.length == 0);
+			detail.text = bEmptyNote ? @"[No note entered]" : t.note;
+			detail.textColor = bEmptyNote ? [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1] : [UIColor whiteColor];
+			break;
+		}
 	}
 }
 

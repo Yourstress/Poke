@@ -45,7 +45,6 @@
 
 -(void)dealloc
 {
-	[textFieldName removeFromSuperview];
 	[textFieldName release];
 	[blockConfirm release];
 	
@@ -54,10 +53,8 @@
 
 -(void)initTextField
 {
-	// add the textbox (name)
-//	CGRect rectTextField = CGRectMake(position_.x, position_.y, 302, 102);
-	CGPoint ptt = [menuButtons convertToWorldSpace:CGPointZero];
-	CGRect rectTextField = CGRectMake(ptt.x, ptt.y-85, 302, 102);
+	CGPoint pt = [menuButtons convertToWorldSpace:CGPointZero];
+	CGRect rectTextField = CGRectMake(pt.x, pt.y-85, 302, 106);
 	rectTextField.origin = [[CCDirector sharedDirector] convertToGL:rectTextField.origin];
 	
 	textFieldName = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, rectTextField.size.width, rectTextField.size.height)];
@@ -68,10 +65,6 @@
 	[textFieldName setTextAlignment:UITextAlignmentLeft];
 	[textFieldName setReturnKeyType:UIReturnKeyDone];
 	textFieldName.delegate = self;
-	
-	// load saved value (after 1 second)
-	//	[textFieldName performSelector:@selector(setText:) withObject:[st.settings objectForKey:SettingsPlayerName] afterDelay:1];
-	[textFieldName performSelector:@selector(setText:) withObject:@"Test" afterDelay:1];
 	
 	[[[CCDirector sharedDirector] openGLView] addSubview:textFieldName];
 }
@@ -295,6 +288,14 @@
 	{
 		[labelNewBalance setString:[Bank stringFromAmount:balance]];
 	}
+}
+
+-(void)close
+{
+	// remove text field
+	[textFieldName removeFromSuperview];
+	
+	[super close];
 }
 
 #pragma mark -
