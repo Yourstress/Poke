@@ -39,6 +39,8 @@
 			else
 				detail.text = [NSString stringWithFormat:@"[%@]", (t.playerOther != nil) ? t.playerOther.name : @"Bank"];
 			break;
+		case DetailViewNotes:
+			detail.text = t.note;
 	}
 }
 

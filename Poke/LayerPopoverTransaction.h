@@ -19,7 +19,7 @@ typedef enum
 
 @class LayerNumberPad;
 
-@interface LayerPopoverTransaction : LayerPopover <LayerNumberPadDelegate>
+@interface LayerPopoverTransaction : LayerPopover <LayerNumberPadDelegate, UITextViewDelegate>
 {
 	CCSprite *transactionNodeFrom;
 	CCSprite *transactionNodeTo;
@@ -29,11 +29,15 @@ typedef enum
 	
 	LayerNumberPad *layerNumberPad;
 	
+	UITextView *textFieldName;
+	
 	float transactionAmount;
 	
 	
 	void (^blockConfirm)(id data);
 }
+
+-(void)initTextField;
 
 -(void)setArrowDirection:(ArrowDirection)arrowDirection;
 
@@ -60,5 +64,10 @@ typedef enum
 -(void)processTransaction;
 
 -(void)setConfirmBlock:(void(^)(id data))block;
+
+#pragma mark -
+#pragma mark Actions
+
+-(void)onButtonConfirm:(id)sender;
 
 @end

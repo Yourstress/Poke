@@ -15,21 +15,7 @@
 	if ( (self = [super initWithPosition:position]) )
 	{
 		// create confirm button
-		CCMenuItemImage *buttonConfirm = [CCMenuItemImage itemFromNormalImage:@"PopoverButton.png" selectedImage:@"PopoverButtonDown.png" block:^(id sender)
-										  {
-											  // disable this
-											  [sender setIsEnabled:NO];
-											  
-											  // process transaction
-											  [self processTransaction];
-											  
-											  // notify
-											  if (blockConfirm)
-												  blockConfirm(sender);
-											  
-											  // close
-											  [self close];
-										  }];
+		CCMenuItemImage *buttonConfirm = [CCMenuItemImage itemFromNormalImage:@"PopoverButton.png" selectedImage:@"PopoverButtonDown.png" target:self selector:@selector(onButtonConfirm:)];
 		buttonConfirm.anchorPoint = ccp(0.5,0);
 		buttonConfirm.position = ccp(0, -menuButtons.contentSize.height*0.43);
 		[menuButtons addChild:buttonConfirm];
@@ -38,6 +24,9 @@
 		labelConfirm.strokeSize = 2;
 		labelConfirm.position = ccp(buttonConfirm.contentSize.width/2.0, buttonConfirm.contentSize.height/2.0 - 5);
 		[buttonConfirm addChild:labelConfirm];
+
+		// init text field
+		[self initTextField];
 		
 		// init transaction amount
 		[self setTransactionAmount:0.0];
@@ -52,6 +41,39 @@
 	}
 	
 	return self;
+}
+
+-(void)dealloc
+{
+	[textFieldName removeFromSuperview];
+	[textFieldName release];
+	[blockConfirm release];
+	
+	[super dealloc];
+}
+
+-(void)initTextField
+{
+	// add the textbox (name)
+//	CGRect rectTextField = CGRectMake(position_.x, position_.y, 302, 102);
+	CGPoint ptt = [menuButtons convertToWorldSpace:CGPointZero];
+	CGRect rectTextField = CGRectMake(ptt.x, ptt.y-85, 302, 102);
+	rectTextField.origin = [[CCDirector sharedDirector] convertToGL:rectTextField.origin];
+	
+	textFieldName = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, rectTextField.size.width, rectTextField.size.height)];
+	[textFieldName setBackgroundColor:[UIColor colorWithRed:0.011765 green:0.137255 blue:0.239216 alpha:1]];
+	[textFieldName setTextColor:[UIColor whiteColor]];
+	[textFieldName setFont:[UIFont fontWithName:@"Verdana" size:18]];
+	[textFieldName setCenter:rectTextField.origin];
+	[textFieldName setTextAlignment:UITextAlignmentLeft];
+	[textFieldName setReturnKeyType:UIReturnKeyDone];
+	textFieldName.delegate = self;
+	
+	// load saved value (after 1 second)
+	//	[textFieldName performSelector:@selector(setText:) withObject:[st.settings objectForKey:SettingsPlayerName] afterDelay:1];
+	[textFieldName performSelector:@selector(setText:) withObject:@"Test" afterDelay:1];
+	
+	[[[CCDirector sharedDirector] openGLView] addSubview:textFieldName];
 }
 
 -(void)setArrowDirection:(ArrowDirection)arrowDirection
@@ -326,6 +348,8 @@
 	else if (transactionNodeFrom.userData == nil && transactionNodeTo.userData != nil)
 		transaction = [Transaction transaction:TransactionTypeCoinIn amount:transactionAmount player:[st.currentBank playerFromName:transactionNodeTo.userData] playerOther:nil];
 	
+	transaction.note = textFieldName.text;
+	
 	// process it
 	[st.currentBank processTransaction:transaction];
 	
@@ -336,6 +360,40 @@
 -(void)setConfirmBlock:(void(^)(id data))block
 {
 	blockConfirm = [block copy];
+}
+
+#pragma mark -
+#pragma mark UITextViewDelegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+	// return on "Done"
+	if ([text isEqual:@"\n"])
+	{
+		[textView resignFirstResponder];
+		return NO;
+	}
+	return YES;
+}
+
+
+#pragma mark -
+#pragma mark Actions
+
+-(void)onButtonConfirm:(id)sender
+{
+    // disable this
+    [sender setIsEnabled:NO];
+    
+    // process transaction
+    [self processTransaction];
+    
+    // notify
+    if (blockConfirm)
+        blockConfirm(sender);
+    
+    // close
+    [self close];
 }
 
 @end

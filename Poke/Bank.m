@@ -304,18 +304,36 @@
 
 -(void)deleteTransaction:(Transaction *)transaction
 {
-	// reverse balance changes
-	balance += [transaction netAmount];
+	Transaction *transactionOther = nil;
+	
+	// if it's "TransferTo", then its sister "TransferFrom" is PREV
+	if (transaction.type == TransactionTypeTransferTo)
+	{
+		transactionOther = [transactions objectAtIndex:[transactions indexOfObject:transaction] - 1];
+	}
+	// if it's "TransferFrom", then its sister "TransferTo" is NEXT
+	else if (transaction.type == TransactionTypeTransferFrom)
+	{
+		transactionOther = [transactions objectAtIndex:[transactions indexOfObject:transaction] + 1];
+	}
+	// only do this if it's not a transfer
+	else
+	{
+		balance += [transaction netAmount];
+	}
 	
 	// remove the transaction from the players
 	[transaction.player deleteTransaction:transaction];
 	
 	// remove it from the other player if exists
-	if (transaction.playerOther)
-		[transaction.playerOther deleteTransaction:transaction];
+	if (transactionOther)
+		[transactionOther.player deleteTransaction:transactionOther];
 	
 	// remove it from the bank
 	[self.transactions removeObject:transaction];
+	
+	if (transactionOther)
+		[self.transactions removeObject:transactionOther];
 }
 
 #pragma mark -

@@ -630,7 +630,17 @@
 	// only proceed to move/end touches if an item is being dragged
 	if (itemDragged)
 	{
+		// make barely visible
 		[itemDragged setOpacityRecursive:150];
+		
+		// animate scaling
+		id action = [CCSequence actions:
+		[CCEaseExponentialOut actionWithAction:[CCScaleTo actionWithDuration:0.15 scale:1.8]],
+		[CCEaseExponentialOut actionWithAction:[CCScaleTo actionWithDuration:0.35 scale:1.15]],
+		[CCRotateBy actionWithDuration:0.25 angle:-3.5], nil];
+		[itemDragged runAction:action];
+		
+		// add it
 		[self addChild:itemDragged];
 		
 		return YES;

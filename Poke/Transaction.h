@@ -48,6 +48,7 @@ typedef enum
 @property (nonatomic, readonly) TransactionType type;
 @property (nonatomic, readonly) float amount;
 @property (nonatomic, retain) NSDate *timeStamp;
+@property (nonatomic, retain) NSString *note;
 
 #pragma mark -
 #pragma mark Static methods
@@ -76,11 +77,14 @@ typedef enum
 // get color from balance
 -(UIColor *)colorFromBalance;
 
-// get string from transaction parties
--(NSString *)stringFromTransactionParties;
-
 // get string from transaction
 -(NSString *)stringFromTransactionAmount;
+
+// get string from other party
+-(NSString *)stringFromOtherParty;
+
+// get string from transaction parties
+-(NSString *)stringFromTransactionParties;
 
 #pragma mark -
 #pragma mark Timestamps

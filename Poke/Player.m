@@ -88,8 +88,11 @@
 
 -(void)deleteTransaction:(Transaction *)transaction
 {
+	// get net amount
+	float netAmount = [transaction netAmount];
+	
 	// reverse the balance change
-	balance -= [transaction netAmount];
+	balance -= netAmount;
 	
 	// remove it from the player's transaction history
 	[transactions removeObject:transaction];

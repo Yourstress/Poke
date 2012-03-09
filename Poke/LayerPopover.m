@@ -102,10 +102,7 @@
 -(void)close
 {
 	id action = [CCEaseSineIn actionWithAction:[CCFadeTo actionWithDuration:0.15 opacity:0]];
-	action = [CCSequence actionOne:action two:[CCCallBlock actionWithBlock:^(void)
-				   {
-					   [self removeFromParentAndCleanup:YES];
-				   }]];
+	action = [CCSequence actionOne:action two:[CCCallFuncND actionWithTarget:self selector:@selector(removeFromParentAndCleanup:) data:(void *)YES]];
 	
 	[self runAction:action];
 }

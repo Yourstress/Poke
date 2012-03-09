@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Standard.h"
 
-#define NumDetailViews 3
+#define NumDetailViews 4
 
 typedef enum
 {
 	DetailViewTimeDifference	= 0,
 	DetailViewTimeDescription	= 1,
 	DetailViewRecipiant			= 2,
+	DetailViewNotes				= 3,
 }	DetailView;
 
 @class Transaction;

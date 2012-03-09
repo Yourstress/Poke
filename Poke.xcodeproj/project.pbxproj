@@ -228,6 +228,7 @@
 		0BF5A12C14B3AA1A00493481 /* IconTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimeline.png; sourceTree = "<group>"; };
 		0BF5A12D14B3AA1A00493481 /* IconTimelineDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconTimelineDown.png; sourceTree = "<group>"; };
 		0BF5A13014B3DDAB00493481 /* BackgroundTimeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundTimeline.png; sourceTree = "<group>"; };
+		3236F4EF150995D7006039B4 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		32463FC51508767C00BB52B7 /* Standard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Standard.h; sourceTree = "<group>"; };
 		32463FC61508767C00BB52B7 /* Standard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Standard.m; sourceTree = "<group>"; };
 		32463FC91508769B00BB52B7 /* Bank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bank.h; sourceTree = "<group>"; };
@@ -641,6 +642,7 @@
 		525943E914831C1600C0E9E8 = {
 			isa = PBXGroup;
 			children = (
+				3236F4EF150995D7006039B4 /* TODO */,
 				5259440814831C1700C0E9E8 /* Poke */,
 				525943F714831C1700C0E9E8 /* Frameworks */,
 				525943F514831C1700C0E9E8 /* Products */,
@@ -1320,7 +1322,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1335,7 +1337,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -1352,7 +1354,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Poke/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1370,7 +1372,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Poke/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

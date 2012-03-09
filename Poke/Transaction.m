@@ -16,6 +16,7 @@
 @synthesize type;
 @synthesize amount;
 @synthesize timeStamp;
+@synthesize note;
 
 #pragma mark -
 #pragma mark Static methods
@@ -84,6 +85,7 @@
 	[player release];
 	[playerOther release];
 	[timeStamp release];
+	[note release];
 }
 
 #pragma mark -
@@ -124,6 +126,35 @@
 		return [NSString stringWithFormat:@"%1.3f KD", netAmount];
 	else
 		return [NSString stringWithFormat:@"[%1.3f KD]", [Bank roundMinus:amount]];
+}
+
+// get string from other party
+-(NSString *)stringFromOtherParty
+{
+	// player is SECOND party
+	if (type == TransactionTypeCashIn ||
+		type == TransactionTypeCoinIn)
+	{
+		return @"Bank";
+	}
+	// player is FIRST party
+	else if (type == TransactionTypeCashOut ||
+			 type == TransactionTypeCoinOut)
+	{
+		return @"Bank";
+	}
+	// player is SECOND party
+	else if (type == TransactionTypeTransferFrom)
+	{
+		return playerOther.name;
+	}
+	// player is FIRST party
+	else if (type == TransactionTypeTransferTo)
+	{
+		return playerOther.name;
+	}
+	
+	return nil;
 }
 
 // get string from transaction parties
@@ -209,6 +240,7 @@
 	[aCoder encodeInt:type forKey:@"Transaction.type"];
 	[aCoder encodeFloat:amount forKey:@"Transaction.amount"];
 	[aCoder encodeObject:timeStamp forKey:@"Transaction.timeStamp"];
+	[aCoder encodeObject:note forKey:@"Transaction.note"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -220,6 +252,7 @@
 		type = [aDecoder decodeIntForKey:@"Transaction.type"];
 		amount = [aDecoder decodeFloatForKey:@"Transaction.amount"];
 		self.timeStamp = [aDecoder decodeObjectForKey:@"Transaction.timeStamp"];
+		self.note = [aDecoder decodeObjectForKey:@"Transaction.note"];
 	}
 	return self;
 }

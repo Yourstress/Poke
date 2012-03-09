@@ -117,7 +117,7 @@ Standard *st;
 	// if it's the current bank, deselect it
 	if ([st.currentBank.name isEqualToString:bankName])
 		st.currentBank = nil;
-	kl
+	
 	// remove bank from array
 	[banks removeObject:bankName];
 	

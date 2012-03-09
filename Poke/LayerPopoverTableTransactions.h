@@ -15,6 +15,8 @@
 	DetailView currentDetailView;
 	
 	BOOL fullDetail;
+	
+	Transaction *transactionSelected;
 }
 
 -(void)setFullDetailEnabled:(BOOL)enabled;
