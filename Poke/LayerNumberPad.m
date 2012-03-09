@@ -57,24 +57,32 @@
 			NSString *sButtonImage		= [NSString stringWithFormat:@"Number%c.png", c];
 			NSString *sButtonImageDown	= [NSString stringWithFormat:@"Number%cDown.png", c];
 			
-			CCMenuItemImage *menuItem = [CCMenuItemImage itemFromNormalImage:sButtonImage selectedImage:sButtonImageDown block:^(id sender)
-										 {
-											if (c == 'C')
-												[delegate numberPadCleared];
-											else if (c == 'K')
-												[delegate numberPadKD];
-											else
-												[delegate numberPadEnteredNumber:[[NSString stringWithFormat:@"%c", c] intValue]];
-											 
-											 // play sound
-											 [[SimpleAudioEngine sharedEngine] playEffect:@"SoundButton.mp3"];
-										 }];
+			CCMenuItemImage *menuItem = [CCMenuItemImage itemFromNormalImage:sButtonImage selectedImage:sButtonImageDown target:self selector:@selector(onNumKeyPressed:)];
+			
+			menuItem.userData = (void *)c;
 			
 			menuItem.position = ccp(side[x]*offsetX, side[y]*offsetY);
 
 			[menuButtons addChild:menuItem];
 		}
 	}
+}
+
+#pragma mark -
+#pragma mark Actions
+
+-(void)onNumKeyPressed:(id)sender
+{
+	char c = (char)[sender userData];
+	if (c == 'C')
+		[delegate numberPadCleared];
+	else if (c == 'K')
+		[delegate numberPadKD];
+	else
+		[delegate numberPadEnteredNumber:[[NSString stringWithFormat:@"%c", c] intValue]];
+	
+	// play sound
+	[[SimpleAudioEngine sharedEngine] playEffect:@"SoundButton.mp3"];
 }
 
 #pragma mark -

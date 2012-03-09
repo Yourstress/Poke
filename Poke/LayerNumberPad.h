@@ -29,4 +29,9 @@
 
 -(void)addNumpadButtons;
 
+#pragma mark -
+#pragma mark Actions
+
+-(void)onNumKeyPressed:(id)sender;
+
 @end
