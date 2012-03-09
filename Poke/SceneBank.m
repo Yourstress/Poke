@@ -522,7 +522,7 @@
 	for (CCMenuItem *item in buttonTimeline.parent.children)
 	{
 		// do this to all items except the timeline
-		if (item != buttonTimeline && item != buttonBank)
+		if (item != buttonTimeline && item != buttonBank && item != buttonBankName)
 		{
 			// hide them if timeline is on
 			id action = [CCFadeTo actionWithDuration:0.1 opacity:isTimelineOn ? 0 : 255];
