@@ -32,6 +32,9 @@
 
 -(void)switchDetailView
 {
+	// play sound
+	[[SimpleAudioEngine sharedEngine] playEffect:@"SoundButton.mp3"];
+	
 	if (++currentDetailView >= NumDetailViews)
 		currentDetailView = 0;
 	
@@ -47,11 +50,11 @@
 	Transaction *transaction = [items objectAtIndex:[items count] - 1 - indexPath.row];
 	
 	// get a cell goin'
-	CellTransaction *cell = [tableView dequeueReusableCellWithIdentifier:@"CellTransaction"];
+	CellTransaction *cell = [tableView dequeueReusableCellWithIdentifier:iPad ? @"CellTransaction" : @"CellTransactionRetina"];
 	if (!cell)
 	{
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CellTransaction" owner:self options:nil];
-		cell = (CellTransaction *)[nib objectAtIndex:0];
+		cell = (CellTransaction *)[nib objectAtIndex:iPad ? 0 : 1];
 	}
 	
 	// apply the transaction to the cell
