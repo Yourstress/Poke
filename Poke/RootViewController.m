@@ -84,11 +84,13 @@
 	// Sample: Autorotate only in landscpe mode
 	//
 	// return YES for the supported orientations
-	if (!([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad))
-		return UIInterfaceOrientationPortrait;
 	
-	return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
-	
+	// IPAD
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+		return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
+	// IPHONE RETINA
+	else
+		return ( UIInterfaceOrientationIsPortrait( interfaceOrientation ) );
 #else
 #error Unknown value in GAME_AUTOROTATION
 	
