@@ -84,6 +84,8 @@
 	// Sample: Autorotate only in landscpe mode
 	//
 	// return YES for the supported orientations
+	if (!([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad))
+		return UIInterfaceOrientationPortrait;
 	
 	return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
 	

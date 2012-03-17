@@ -40,7 +40,7 @@
 								   CCNode *node = sender;
 								   Player *pl = [st.currentBank playerFromName:playerName];
 								   
-                                   CGPoint pos = [node convertToWorldSpace:ccp(node.contentSize.width/2.0,104)];
+                                   CGPoint pos = [node convertToWorldSpace:ccp(node.contentSize.width/2.0,Scaled(104))];
                                    LayerPopoverTableTransactions *popover = [LayerPopoverTableTransactions popoverWithPosition:pos title:playerName items:pl.transactions block:^(id data)
 																 {
 																 }];
@@ -70,7 +70,7 @@
 -(void)repositionPlayers
 {
 	// get number of columns needed
-	int numCols = 6;
+	int numCols = iPad ? 6 : 4;
 	
 	// if we have more players than what we can fix in the grid...
 	while ([self.children count] > numCols*3)
@@ -79,7 +79,7 @@
 		numCols++;
 	}
 	
-	float marginY = 26;
+	float marginY = Scaled(26);
 	//	float totalXSpacing = self.contentSize.width - marginX*2.0;
 	float XSpacing = self.contentSize.width / numCols;
 	
@@ -95,7 +95,7 @@
 		float posY = self.contentSize.height-player.contentSize.height/2.0 - marginY;
 		
 		posX += col * XSpacing;
-		posY -= (row * player.contentSize.height*1.30);
+		posY -= (row * player.contentSize.height*1.3);
 		
 		player.position = ccp(posX,posY);
 	}

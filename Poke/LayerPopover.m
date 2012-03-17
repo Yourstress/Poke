@@ -44,22 +44,31 @@
 		menuButtons.contentSize = spBody.contentSize;
 		[layer addChild:menuButtons];
 		
-		CCSprite *spArrow = [CCSprite spriteWithFile:@"PopoverArrow.png"];
-		spArrow.anchorPoint = ccp(isArrowOnLeft ? 1 : 0, 0.5);
-		spArrow.position = ccp(isArrowOnLeft ? -PopoverHalfWidth : PopoverHalfWidth, 0);
-		if (!isArrowOnLeft)
-			spArrow.flipX = YES;
-		[self addChild:spArrow z:0];
+		// only do this on iPad
+		if (iPad)
+		{
+			CCSprite *spArrow = [CCSprite spriteWithFile:@"PopoverArrow.png"];
+			spArrow.anchorPoint = ccp(isArrowOnLeft ? 1 : 0, 0.5);
+			spArrow.position = ccp(isArrowOnLeft ? -PopoverHalfWidth : PopoverHalfWidth, 0);
+			if (!isArrowOnLeft)
+				spArrow.flipX = YES;
+			[self addChild:spArrow z:0];
 		
-		// up-reaching?
-		if (st.size.height-position.y < spBody.contentSize.height)
-			spBody.anchorPoint = ccp(0.5,0.85);
-		// down-reaching?
-		if (position.y < spBody.contentSize.height)
-			spBody.anchorPoint = ccp(0.5,0.15);
-		
-		// reset the offset and add 60 more for length of arrow
-		self.position = ccpAdd(position, isArrowOnLeft ? ccp(PopoverHalfWidth+60,0) : ccp(-PopoverHalfWidth-60,0));
+			// up-reaching?
+			if (st.size.height-position.y < spBody.contentSize.height)
+				spBody.anchorPoint = ccp(0.5,0.85);
+			// down-reaching?
+			if (position.y < spBody.contentSize.height)
+				spBody.anchorPoint = ccp(0.5,0.15);
+			
+			// reset the offset and add 60 more for length of arrow
+			self.position = ccpAdd(position, isArrowOnLeft ? ccp(PopoverHalfWidth+60,0) : ccp(-PopoverHalfWidth-60,0));
+		}
+		else
+		{
+			// center it on non-ipad devices
+			self.position = ccp(st.size.width/2.0,st.size.height/2.0);
+		}
 		
 		// enable touches
 		self.isTouchEnabled = YES;
@@ -73,12 +82,12 @@
 	if (labelTitle)
 		[labelTitle removeFromParentAndCleanup:YES];
 	
-	labelTitle = [CCLabelStroked labelWithString:title fontName:FontFamilyRegular fontSize:30];
-	labelTitle.strokeSize = 2;
+	labelTitle = [CCLabelStroked labelWithString:title fontName:FontFamilyRegular fontSize:Scaled(30)];
+	labelTitle.strokeSize = iPad ? 2 : 1.5;
 	[layer addChild:labelTitle];
 	
 	labelTitle.anchorPoint = ccp(0.5,1);
-	labelTitle.position = ccp(0, PopoverHalfHeight-19);
+	labelTitle.position = ccp(0, Scaled(PopoverHalfHeight-19));
 }
 
 -(void)setOpacity:(GLubyte)o

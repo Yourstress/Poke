@@ -69,9 +69,8 @@
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
 	
-//	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-//	if( ! [director enableRetinaDisplay:YES] )
-//		CCLOG(@"Retina Display Not supported");
+	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
+	[director enableRetinaDisplay:YES];
 	
 	//
 	// VERY IMPORTANT:
@@ -82,11 +81,18 @@
 	// By default, this template only supports Landscape orientations.
 	// Edit the RootViewController.m file to edit the supported orientations.
 	//
-#if GAME_AUTOROTATION == kGameAutorotationUIViewController
-	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
-#else
-	[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
-#endif
+	if (iPad)
+	{
+		#if GAME_AUTOROTATION == kGameAutorotationUIViewController
+		[director setDeviceOrientation:kCCDeviceOrientationPortrait];
+		#else
+		[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
+		#endif
+	}
+	else
+	{
+		[director setDeviceOrientation:kCCDeviceOrientationPortrait];
+	}
 	
 	[director setAnimationInterval:1.0/60];
 	
@@ -97,7 +103,6 @@
 	[window addSubview: viewController.view];
 	
 	[window makeKeyAndVisible];
-	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
@@ -110,7 +115,7 @@
 	st = [[Standard alloc] init];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [SceneBank node]];
+	[[CCDirector sharedDirector] runWithScene:[SceneBank node]];
 }
 
 

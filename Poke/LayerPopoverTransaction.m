@@ -20,8 +20,8 @@
 		buttonConfirm.position = ccp(0, -menuButtons.contentSize.height*0.43);
 		[menuButtons addChild:buttonConfirm];
 
-		CCLabelStroked *labelConfirm = [CCLabelStroked labelWithString:@"Confirm Transaction" fontName:FontFamilyRegular fontSize:28];
-		labelConfirm.strokeSize = 2;
+		CCLabelStroked *labelConfirm = [CCLabelStroked labelWithString:@"Confirm Transaction" fontName:FontFamilyRegular fontSize:Scaled(28)];
+		labelConfirm.strokeSize = Scaled(2);
 		labelConfirm.position = ccp(buttonConfirm.contentSize.width/2.0, buttonConfirm.contentSize.height/2.0 - 5);
 		[buttonConfirm addChild:labelConfirm];
 
@@ -35,9 +35,17 @@
 		[self setBalanceTitles];
 		
 		// init number pad
-		layerNumberPad = [LayerNumberPad numberPadWithPosition:ccp(-165,0) facingLeft:YES];
+		layerNumberPad = [LayerNumberPad numberPadWithPosition:ccp(Scaled(-165),0) facingLeft:YES];
 		layerNumberPad.delegate = self;
 		[layer addChild:layerNumberPad];
+		
+		// move it to the right on iphone, for keyboard
+		if (!iPad)
+		{
+			id action = [CCMoveBy actionWithDuration:0.25 position:ccp(165/4.0,0)];
+			action = [CCEaseSineOut actionWithAction:action];
+			[self runAction:action];
+		}
 	}
 	
 	return self;
@@ -54,13 +62,13 @@
 -(void)initTextField
 {
 	CGPoint pt = [menuButtons convertToWorldSpace:CGPointZero];
-	CGRect rectTextField = CGRectMake(pt.x, pt.y-85, 302, 106);
+	CGRect rectTextField = CGRectMake(pt.x, pt.y-Scaled(85), Scaled(302), Scaled(106));
 	rectTextField.origin = [[CCDirector sharedDirector] convertToGL:rectTextField.origin];
 	
 	textFieldName = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, rectTextField.size.width, rectTextField.size.height)];
 	[textFieldName setBackgroundColor:[UIColor colorWithRed:0.011765 green:0.137255 blue:0.239216 alpha:1]];
 	[textFieldName setTextColor:[UIColor whiteColor]];
-	[textFieldName setFont:[UIFont fontWithName:@"Verdana" size:18]];
+	[textFieldName setFont:[UIFont fontWithName:@"Verdana" size:Scaled(18)]];
 	[textFieldName setCenter:rectTextField.origin];
 	[textFieldName setTextAlignment:UITextAlignmentLeft];
 	[textFieldName setReturnKeyType:UIReturnKeyDone];
@@ -110,8 +118,8 @@
 	transactionNodeFrom.position = ccp(-layer.parent.contentSize.width*0.25, layer.parent.contentSize.height*0.22);
 	[layer addChild:transactionNodeFrom];
 	
-	CCLabelStroked *labelName = [CCLabelStroked labelWithString:player fontName:@"TeluguSangamMN" fontSize:26];
-	labelName.strokeSize = 2;
+	CCLabelStroked *labelName = [CCLabelStroked labelWithString:player fontName:@"TeluguSangamMN" fontSize:Scaled(26)];
+	labelName.strokeSize = Scaled(2);
 	labelName.anchorPoint = ccp(0.5,1);
 	labelName.position = ccp(transactionNodeFrom.contentSize.width/2.0, 0);
 	[transactionNodeFrom addChild:labelName];
@@ -152,8 +160,8 @@
 	transactionNodeTo.position = ccp(layer.parent.contentSize.width*0.25, layer.parent.contentSize.height*0.22);
 	[layer addChild:transactionNodeTo];
 	
-	CCLabelStroked *labelName = [CCLabelStroked labelWithString:player fontName:@"TeluguSangamMN" fontSize:26];
-	labelName.strokeSize = 2;
+	CCLabelStroked *labelName = [CCLabelStroked labelWithString:player fontName:@"TeluguSangamMN" fontSize:Scaled(26)];
+	labelName.strokeSize = Scaled(2);
 	labelName.anchorPoint = ccp(0.5,1);
 	labelName.position = ccp(transactionNodeTo.contentSize.width/2.0, 0);
 	[transactionNodeTo addChild:labelName];
@@ -172,9 +180,9 @@
 	
 	if (labelTransactionAmount == nil)
 	{
-		labelTransactionAmount = [CCLabelStroked labelWithString:strAmount fontName:@"TeluguSangamMN" fontSize:38];
-		labelTransactionAmount.strokeSize = 2;
-		labelTransactionAmount.position = ccp(0,+75);
+		labelTransactionAmount = [CCLabelStroked labelWithString:strAmount fontName:@"TeluguSangamMN" fontSize:Scaled(38)];
+		labelTransactionAmount.strokeSize = Scaled(2);
+		labelTransactionAmount.position = ccp(0,Scaled(75));
 		[layer addChild:labelTransactionAmount];
 	}
 	else
@@ -193,14 +201,14 @@
 
 -(void)setBalanceTitles
 {
-	CCLabelStroked *labelCurrentBalanceTitle = [CCLabelStroked labelWithString:@"CURRENT" fontName:FontFamilyRegular fontSize:16];
-	labelCurrentBalanceTitle.strokeSize = 2;
-	labelCurrentBalanceTitle.position = ccp(0,16);
+	CCLabelStroked *labelCurrentBalanceTitle = [CCLabelStroked labelWithString:@"CURRENT" fontName:FontFamilyRegular fontSize:Scaled(16)];
+	labelCurrentBalanceTitle.strokeSize = Scaled(2);
+	labelCurrentBalanceTitle.position = ccp(0,Scaled(16));
 	[layer addChild:labelCurrentBalanceTitle];
 	
-	CCLabelStroked *labelNewBalanceTitle = [CCLabelStroked labelWithString:@"NEW" fontName:FontFamilyRegular fontSize:16];
-	labelNewBalanceTitle.strokeSize = 2;
-	labelNewBalanceTitle.position = ccp(0,-16);
+	CCLabelStroked *labelNewBalanceTitle = [CCLabelStroked labelWithString:@"NEW" fontName:FontFamilyRegular fontSize:Scaled(16)];
+	labelNewBalanceTitle.strokeSize = Scaled(2);
+	labelNewBalanceTitle.position = ccp(0,Scaled(-16));
 	[layer addChild:labelNewBalanceTitle];
 }
 
@@ -213,9 +221,9 @@
 	
 	if (!labelCurrentBalance)
 	{
-		labelCurrentBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:25];
-		labelCurrentBalance.strokeSize = 2;
-		labelCurrentBalance.position = ccp(transactionNodeFrom.contentSize.width/2.0,-52);
+		labelCurrentBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:Scaled(25)];
+		labelCurrentBalance.strokeSize = Scaled(2);
+		labelCurrentBalance.position = ccp(transactionNodeFrom.contentSize.width/2.0,Scaled(-52));
 		[transactionNodeFrom addChild:labelCurrentBalance z:0 tag:1];
 	}
 	else
@@ -236,9 +244,9 @@
 	
 	if (!labelNewBalance)
 	{
-		labelNewBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:25];
-		labelNewBalance.strokeSize = 2;
-		labelNewBalance.position = ccp(transactionNodeFrom.contentSize.width/2.0,-84);
+		labelNewBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:Scaled(25)];
+		labelNewBalance.strokeSize = Scaled(2);
+		labelNewBalance.position = ccp(transactionNodeFrom.contentSize.width/2.0,Scaled(-84));
 		[transactionNodeFrom addChild:labelNewBalance z:0 tag:2];
 	}
 	else
@@ -256,9 +264,9 @@
 	
 	if (!labelCurrentBalance)
 	{
-		labelCurrentBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:25];
-		labelCurrentBalance.strokeSize = 2;
-		labelCurrentBalance.position = ccp(transactionNodeTo.contentSize.width/2.0,-52);
+		labelCurrentBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:Scaled(25)];
+		labelCurrentBalance.strokeSize = Scaled(2);
+		labelCurrentBalance.position = ccp(transactionNodeTo.contentSize.width/2.0,Scaled(-52));
 		[transactionNodeTo addChild:labelCurrentBalance z:0 tag:1];
 	}
 	else
@@ -279,9 +287,9 @@
 	
 	if (!labelNewBalance)
 	{
-		labelNewBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:25];
-		labelNewBalance.strokeSize = 2;
-		labelNewBalance.position = ccp(transactionNodeTo.contentSize.width/2.0,-84);
+		labelNewBalance = [CCLabelStroked labelWithString:[Bank stringFromAmount:balance] fontName:@"TeluguSangamMN" fontSize:Scaled(25)];
+		labelNewBalance.strokeSize = Scaled(2);
+		labelNewBalance.position = ccp(transactionNodeTo.contentSize.width/2.0,Scaled(-84));
 		[transactionNodeTo addChild:labelNewBalance z:0 tag:2];
 	}
 	else
@@ -296,6 +304,22 @@
 	[textFieldName removeFromSuperview];
 	
 	[super close];
+}
+
+#pragma mark -
+#pragma mark Node Overrides
+
+-(void)setPosition:(CGPoint)position
+{
+	if (textFieldName)
+	{
+		CGPoint ptDiff = ccpSub(position_, position);
+
+		textFieldName.center = ccp(textFieldName.center.x-ptDiff.x,
+								   textFieldName.center.y+ptDiff.y);
+	}
+	
+	[super setPosition:position];
 }
 
 #pragma mark -
@@ -366,6 +390,26 @@
 #pragma mark -
 #pragma mark UITextViewDelegate
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+	if (!iPad)
+	{
+		id action = [CCMoveBy actionWithDuration:0.25 position:ccp(0,100)];
+		action = [CCEaseSineOut actionWithAction:action];
+		[self runAction:action];
+	}
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+	if (!iPad)
+	{
+		id action = [CCMoveBy actionWithDuration:0.25 position:ccp(0,-100)];
+		action = [CCEaseSineOut actionWithAction:action];
+		[self runAction:action];
+	}
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
 	// return on "Done"
@@ -374,6 +418,7 @@
 		[textView resignFirstResponder];
 		return NO;
 	}
+	
 	return YES;
 }
 

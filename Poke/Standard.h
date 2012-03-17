@@ -28,7 +28,7 @@
 
 #define FontSize(size)		(iPad ? size : size/2.0)
 
-#define Scaled(x)			(iPad ? x : x/2.0)
+#define Scaled(x)			(iPad ? x : (x)/2.0)
 
 typedef enum
 {

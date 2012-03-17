@@ -126,14 +126,15 @@
 			[*labels[x] removeFromParentAndCleanup:YES];
 		
 		// create the label
-		*labels[x] = [CCLabelStroked labelWithString:@"[Undefined]" fontName:FontFamilyBold fontSize:x <= 1 ? 32 : 16];
+		*labels[x] = [CCLabelStroked labelWithString:@"[Undefined]" fontName:FontFamilyBold fontSize:Scaled(x <= 1 ? 32 : 16)];
 		
 		// apply the outline
-		[*labels[x] setStrokeSize:2];
+		[*labels[x] setStrokeSize:Scaled(2)];
 		
 		// move right OR left HALF THE WIDTH, and adjust its anchor
 		float direction = (x%2 == 0 ? -1 : 1);
-		[*labels[x] setPosition:ccp(direction * length/2.0 + direction*-1 * LabelOffset, height[x])];
+		[*labels[x] setPosition:ccp(Scaled(direction * length/2.0 + direction*-1 * LabelOffset),
+									Scaled(height[x]))];
 		[*labels[x] setAnchorPoint:ccp(x%2, 0.5)];
 
 		// hide them initially
@@ -152,7 +153,7 @@
 		spOverview = [CCSprite spriteWithFile:@"TimelineOverview.png"];
 		
 		// position it
-		spOverview.position = ccp(0, 38);
+		spOverview.position = ccp(0, Scaled(38));
 		
 		// zero scale
 		spOverview.scaleX = 0;
@@ -212,7 +213,7 @@
 	}
 	
 	// animate the bar
-	action = [CCScaleTo actionWithDuration:duration scaleX:show ? length : 0 scaleY:1];
+	action = [CCScaleTo actionWithDuration:duration scaleX:show ? (iPad ? length : length*2.0) : 0 scaleY:1];
 	action = [easeClass actionWithAction:action];
 	[spTimeline runAction:action];
 	

@@ -33,7 +33,7 @@
 		
 		// create menu
 		menuButtons = [CCTargetedTouchMenu menuWithTouchPriority:INT_MIN withItems:nil];
-		menuButtons.position = ccp(spBackground.contentSize.width/2.0+6, spBackground.contentSize.height/2.0-23);
+		menuButtons.position = ccp(spBackground.contentSize.width/2.0+Scaled(6), spBackground.contentSize.height/2.0-Scaled(23));
 		[spBackground addChild:menuButtons];
 		
 		[self addNumpadButtons];
@@ -46,8 +46,8 @@
 {
 	char cButton[12] = { 'C','0','K','1','2','3','4','5','6','7','8','9' };
 	int side[4] = { -1, 0, 1, 2 };
-	const float offsetX = 48.0;
-	const float offsetY = 45.0;
+	const float offsetX = Scaled(48.0);
+	const float offsetY = Scaled(45.0);
 	
 	for (int x = 0; x < 3; x++)
 	{

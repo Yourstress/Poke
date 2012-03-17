@@ -26,7 +26,7 @@
 		CCNode *spBody = [self getChildByTag:1];
 
 		// init table
-		table = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, PopoverHalfWidth*2, PopoverHalfHeight*2) style:UITableViewStyleGrouped] autorelease];
+		table = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, Scaled(PopoverHalfWidth*2), Scaled(PopoverHalfHeight*2)) style:UITableViewStyleGrouped] autorelease];
 		table.delegate = self;
 		table.dataSource = self;
 		table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -35,8 +35,13 @@
 		[table setBackgroundColor:[UIColor clearColor]];
 		CCUIViewWrapper *uiTable = [CCUIViewWrapper wrapperForUIView:table];
 		[self addChild:uiTable z:1000];
-		uiTable.contentSize = CGSizeMake(PopoverHalfWidth*2, PopoverHalfHeight*2 - 65);
-		uiTable.position = ccp(spBody.position.x, spBody.position.y - (spBody.anchorPoint.y*spBody.contentSize.height) + 220);
+		uiTable.contentSize = CGSizeMake(Scaled(PopoverHalfWidth*2), Scaled(PopoverHalfHeight*2 - 65));
+		
+		if (iPad)
+			uiTable.position = ccp(spBody.position.x, spBody.position.y - (spBody.anchorPoint.y*spBody.contentSize.height) + 220);
+		else
+			uiTable.position = ccp(PopoverHalfWidth/2.0,-PopoverHalfHeight/2.0);
+		
 		uiTable.opacity = 120;
 		
 		// set the title
@@ -63,7 +68,7 @@
 	}
 	
 	button.anchorPoint = ccp(1,1);
-	button.position = ccp(PopoverHalfWidth,PopoverHalfHeight-2);
+	button.position = ccp(Scaled(PopoverHalfWidth),Scaled(PopoverHalfHeight-2));
 	[menuButtons addChild:button];
 	
 	// since we're adding a button, recenter label
@@ -114,6 +119,11 @@
 #pragma mark -
 #pragma mark UITableViewDelegate
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	cell.textLabel.font = [UIFont fontWithName:@"TeluguSangamMN-Bold" size:iPad ? 24 : 12];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	// get the selected cell
@@ -121,6 +131,11 @@
 	
 	// execute block with cell text
 	block(cell.textLabel.text);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (iPad ? 44 : 22);
 }
 
 @end

@@ -23,21 +23,29 @@
 	{
 		// turn on touches
 		self.isTouchEnabled = YES;
-//#ifndef DEBUG	
-		// show splash then fade out
-		CCSprite *spSplash = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
-		spSplash.anchorPoint = ccp(0,0);
-		[self addChild:spSplash z:1000];
 		
-		// fade out here
-		id action = [CCSequence actions:
-					 [CCDelayTime actionWithDuration:2.5],
-					 [CCFadeOut actionWithDuration:0.7],
-					 [CCCallFuncND actionWithTarget:spSplash selector:@selector(removeFromParentAndCleanup:) data:(void *)YES],
-					 nil];
+//#ifndef DEBUG	
+		if (iPad)
+		{
+			// show splash then fade out
+			CCSprite *spSplash = [CCSprite spriteWithFile:iPad ? @"Default-Landscape~ipad.png" : @"Default@2x.png"];
+			spSplash.anchorPoint = ccp(0,0);
+			[self addChild:spSplash z:1000];
+			
+			// fade out here
+			id action = [CCSequence actions:
+						 [CCDelayTime actionWithDuration:2.5],
+						 [CCFadeOut actionWithDuration:0.7],
+						 [CCCallFuncND actionWithTarget:spSplash selector:@selector(removeFromParentAndCleanup:) data:(void *)YES],
+						 nil];
 
-		[spSplash runAction:action];
+			[spSplash runAction:action];
+		}
 //#endif
+		
+		// set font sizes on retina
+		if (!iPad)
+			[CCMenuItemFont setFontSize:[CCMenuItemFont fontSize]/2.0];
 
 		// background
 		[self initBackground];
@@ -52,7 +60,7 @@
 -(void)initBackground
 {
 	// background
-	spBackground = [CCSprite spriteWithFile:@"Background.png"];
+	spBackground = [CCSprite spriteWithFile:iPad ? @"Background-iPad.png" : @"Background-iPhone.png"];
 	spBackground.anchorPoint = ccp(0,0);
 	[self addChild:spBackground z:0];
 }
@@ -65,29 +73,29 @@
 	
 	// bank button
 	buttonBank = [CCMenuItemImage itemFromNormalImage:@"IconBank.png" selectedImage:@"IconBankDown.png" target:self selector:@selector(onBank:)];
-	buttonBank.position = ccp(111,666);
+	buttonBank.position = iPad ? ccp(111,666) : ccp(30,443);
 	buttonBank.tag = ItemTypeBank;
 	[menuButtons addChild:buttonBank];
 	
 	// add player button
 	buttonAddPlayer = [CCMenuItemImage itemFromNormalImage:@"IconAddPlayer.png" selectedImage:@"IconAddPlayerDown.png" target:self selector:@selector(onAddPlayer:)];
-	buttonAddPlayer.position = ccp(st.size.width-111, 666);
+	buttonAddPlayer.position = iPad ? ccp(st.size.width-111, 666) : ccp(st.size.width-32, 443);
 	buttonAddPlayer.tag = ItemTypeDelete;
 	[menuButtons addChild:buttonAddPlayer];
 	
 	// transaction history button
 	buttonTransactions = [CCMenuItemImage itemFromNormalImage:@"IconCoin.png" selectedImage:@"IconCoinDown.png" target:self selector:@selector(onTransactions:)];
-	buttonTransactions.position = ccp(st.size.width-211, 666);
+	buttonTransactions.position = iPad ? ccp(st.size.width-211, 666) : ccp(st.size.width-80, 443);
 	[menuButtons addChild:buttonTransactions];
 	
 	// timeline button
 	buttonTimeline = [CCMenuItemImage itemFromNormalImage:@"IconTimeline.png" selectedImage:@"IconTimelineDown.png" disabledImage:@"IconTimelineDown.png" target:self selector:@selector(onTimeline:)];
-	buttonTimeline.position = ccp(st.size.width-311, 666);
+	buttonTimeline.position = iPad ? ccp(st.size.width-311, 666) : ccp(st.size.width-32, 37);
 	[menuButtons addChild:buttonTimeline];
 	
 	// bank name BUTTON
-	labelBankName = [CCLabelStroked labelWithString:@"[No bank selected]" fontName:FontFamilyRegular fontSize:36];
-	labelBankName.strokeSize = 3;
+	labelBankName = [CCLabelStroked labelWithString:@"[No bank selected]" fontName:FontFamilyRegular fontSize:FontSize(36)];
+	labelBankName.strokeSize = Scaled(3);
 //	[self addChild:labelBankName];
 	buttonBankName = [CCMenuItemLabel itemWithLabel:labelBankName block:^(id sender)
 					  {
@@ -107,21 +115,22 @@
 						  // play alert sound
 						  [[SimpleAudioEngine sharedEngine] playEffect:@"SoundAlert.mp3"];
 					  }];
-	buttonBankName.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, 14));
+	buttonBankName.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, Scaled(14)));
 	buttonBankName.anchorPoint = ccp(0,0.5);
 	[menuButtons addChild:buttonBankName];
 	
 	
 	// bank balance label
-	labelBankBalance = [CCLabelStroked labelWithString:@"0.000 KD" fontName:FontFamilyRegular fontSize:32];
-	labelBankBalance.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, -26));
+	labelBankBalance = [CCLabelStroked labelWithString:@"0.000 KD" fontName:FontFamilyRegular fontSize:Scaled(32)];
+	labelBankBalance.position = ccpAdd(buttonBank.position, ccp(buttonBank.contentSize.width*0.75, Scaled(-26)));
 	labelBankBalance.anchorPoint = ccp(0,0.5);
-	labelBankBalance.strokeSize = 3;
+	labelBankBalance.strokeSize = Scaled(3);
 	[self addChild:labelBankBalance];
 	
 	// players
-	layerPlayers = [LayerPlayers playersLayerWithSize:CGSizeMake(970, 574)];
-	layerPlayers.position = ccp(st.size.width/2.0, 24+(574/2));
+	layerPlayers = [LayerPlayers playersLayerWithSize:iPad ? CGSizeMake(970, 574) :
+															 CGSizeMake(320, 406)];
+	layerPlayers.position = ccp(st.size.width/2.0, iPad ? 24+(574/2) : 185);
 	layerPlayers.anchorPoint = ccp(0.5,0.5);
 	[self addChild:layerPlayers];
 	
@@ -491,7 +500,8 @@
 	if (!isTimelineOn)
 	{
 		// create timeline background
-		CCSprite *spTimeline = [CCSprite spriteWithFile:@"BackgroundTimeline.png"];
+		CCSprite *spTimeline = [CCSprite spriteWithFile:iPad ? @"BackgroundTimeline-iPad.png" :
+															   @"BackgroundTimeline-iPhone.png"];
 		spTimeline.anchorPoint = ccp(0,0);
 		[spBackground addChild:spTimeline];
 		[spTimeline runAction:[CCFadeIn actionWithDuration:0.15]];
@@ -533,9 +543,13 @@
 	}
 	
 	// move the timeline back OR forward
-	id action = [CCMoveBy actionWithDuration:0.3 position:ccp(isTimelineOn ? 200 : -200, 0)];
-	action = [CCEaseSineInOut actionWithAction:action];
-	[buttonTimeline runAction:action];
+	// ONLY ON IPAD
+	if (iPad)
+	{
+		id action = [CCMoveBy actionWithDuration:0.3 position:ccp(isTimelineOn ? 200 : -200, 0)];
+		action = [CCEaseSineInOut actionWithAction:action];
+		[buttonTimeline runAction:action];
+	}
 }
 
 -(void)onAddPlayer:(id)sender
@@ -740,8 +754,8 @@
 	// if not created yet, create it
 	if (layerTimeline == nil && !hidden)
 	{
-		layerTimeline = [LayerTimeline timelineWithLength:436 delegate:layerPlayers];
-		layerTimeline.position = ccp(612, 646);
+		layerTimeline = [LayerTimeline timelineWithLength:Scaled(436) delegate:layerPlayers];
+		layerTimeline.position = iPad ? ccp(612, 646) : ccp(136,30);
 		[layerTimeline setTransactions:st.currentBank.transactions];
 		[self addChild:layerTimeline];
 	}
